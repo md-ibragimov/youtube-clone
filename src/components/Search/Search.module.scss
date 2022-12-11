@@ -1,0 +1,33 @@
+.search-form {
+  .search {
+    width: 220px;
+    height: auto;
+    padding: 5px 15px;
+    font-size: 22px;
+    border: none;
+    transition: .3s;
+    background: rgba(0, 0, 0, .3);
+    color: #fff;
+    position: relative;
+    z-index: 101;
+
+    &:focus {
+      width: 280px;
+      outline: none;
+      border: 1px solid rgb(42, 163, 255);
+    }
+
+    &::placeholder {
+      color: #fff;
+      opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+      color: #fff;
+    }
+
+    // &::-ms-input-placeholder {
+    //   color: #fff;
+    // }
+  }
+}
