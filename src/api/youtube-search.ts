@@ -1,10 +1,20 @@
-import axios from 'axios';
+import axios from "axios";
 
-export default axios.create({
-  baseURL: 'https://www.googleapis.com/youtube/v3',
-  params: {
-    part: 'snippet',
-    maxResults: 5,
-    key: import.meta.env.VITE_YOUTUBE_API_KEY
-  }
-});
+
+export default (request: string, nextPageToken: string = "") => {
+  return axios.request({
+    method: 'GET',
+    url: 'https://youtube-v31.p.rapidapi.com/search',
+    params: {
+      q: request,
+      part: 'snippet',
+      maxResults: '50',
+      pageToken: nextPageToken,
+      type: 'channel,video'
+    },
+    headers: {
+      'X-RapidAPI-Key': import.meta.env.VITE_YOUTUBE_API_KEY,
+      'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
+    }
+  })
+}

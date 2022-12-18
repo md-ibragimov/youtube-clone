@@ -1,4 +1,3 @@
-import youtube from '../../api/youtube-search';
 import Layout from '../Layout/Layout';
 import Homepage from '../../pages/Homepage/Homepage';
 import Videopage from '../../pages/Videopage/Videopage';
@@ -8,16 +7,6 @@ import { Routes, Route } from 'react-router-dom'
 
 
 function App({ }) {
-  // const [value, setValue] = useState('');
-  // const searchList = (e: string) => {
-  //   youtube.get('/search', {
-  //     params: {
-  //       q: e
-  //     }
-  //   })
-  //   .then(e => console.log(e))
-  // }
-
   return (
 
     <Routes>
