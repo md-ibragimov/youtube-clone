@@ -19,6 +19,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "mui.d.ts"],
+  "include": ["src", "mui.d.ts", "testDataSearch.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

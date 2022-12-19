@@ -1,6 +1,6 @@
 import youtubeSearch from '../../api/youtube-search';
 import styles from './Searchresults.module.scss';
-import ChanelItem from '../../components/ChannelItem/ChannelItem';
+import ChannelItem from '../../components/ChannelItem/ChannelItem';
 import VideoItem from '../../components/VideoItem/VideoItem';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -20,17 +20,24 @@ function Searchresults({ }) {
     youtubeSearch(searchrequest).then(el => {
       setSearchResult([...el.data.items]);
       setPageToken(el.data.nextPageToken);
-    });
+    })
     return function cleanTitle() { document.title = 'YouTube' }
   }, [searchrequest])
   return (
     <div className={styles.wrapper}>
       <Container className={styles.container}>
+
         {searchResult.map(el => (
           el.id.kind === 'youtube#channel' ?
-            <ChanelItem dataInfo={el} key={el.id.channelId} /> :
+            <ChannelItem dataInfo={el} key={el.id.channelId} /> :
             <VideoItem dataInfo={el} key={el.id.videoId} />
         ))}
+        <button onClick={() => {
+          youtubeSearch(searchrequest, pageToken).then(el => {
+            setSearchResult((prevValue) => [...prevValue, ...el.data.items]);
+            setPageToken(el.data.nextPageToken);
+          })
+        }}> download more</button>
       </Container>
     </div>
   );
