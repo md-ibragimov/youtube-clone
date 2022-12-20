@@ -28,7 +28,7 @@ const RecomendedVideoItem: React.FC<any> = ({ data }) => {
             }}
             className={styles['video-image']}
           />
-          <div className={styles['video-duration']}></div>
+          <div className={styles['video-duration']}>{data.lengthText}</div>
         </div>
         <div className={styles['video-info']}>
           <Typography className={styles['video-title']}>{data.title}</Typography>

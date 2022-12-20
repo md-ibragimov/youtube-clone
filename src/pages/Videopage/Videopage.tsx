@@ -6,6 +6,7 @@ import numbro from 'numbro';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import moment from 'moment';
 import RecomendedVideoItem from '../../components/RecomendedVideoItem/RecomendedVideoItem';
+import CircularProgress from '@mui/material/CircularProgress';
 import { Typography } from '@mui/material'
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -14,6 +15,7 @@ import { useEffect, useState } from 'react';
 function Videopage({ }) {
   const [value, setValue] = useState<any>({});
   const [relatedVideos, setRelatedVideos] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const videoId = useParams().id;
 
   useEffect(() => {
@@ -26,9 +28,10 @@ function Videopage({ }) {
     return function cleanTitle() { document.title = 'YouTube' }
   }, [])
   useEffect(() => {
+    setIsLoading(true);
     youtubeRelatedVideos(`${videoId}`)
       .then((element) => {
-        console.log(element)
+        setIsLoading(false)
         setRelatedVideos(element.data.data)
       })
   }, [videoId])
@@ -54,9 +57,10 @@ function Videopage({ }) {
         </div>
       </div>
       <div className={styles['video-recomendation']}>
-        {relatedVideos.map((el: any) => (
+        {isLoading ? <CircularProgress /> : relatedVideos.map((el: any) => (
           <RecomendedVideoItem key={el.videoId} data={el} />
-        ))}
+        ))
+        }
       </div>
     </div>
   );
