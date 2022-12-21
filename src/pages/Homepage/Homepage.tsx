@@ -1,8 +1,9 @@
 import styles from './HomePage.module.scss';
 import trendingVideos from '../../api/youtube-trending-video-list';
+import HomepageVideoItem from '../../components/HomepageVideoItem/HomepageVideoItem';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
-import HomepageVideoItem from '../../components/HomepageVideoItem/HomepageVideoItem';
 
 function shuffle(arr: Array<Object>) {
   return arr.map(i => [Math.random(), i]).sort().map(i => i[1])
@@ -28,19 +29,29 @@ interface IVideo {
 
 function Homepage({ }) {
   const [videos, setVideos] = useState<any>([]);
-
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   useEffect(() => {
+    setIsLoading(true);
     trendingVideos()
       .then(el => {
-        setVideos(shuffle(el.data))
+        setVideos(shuffle(el.data));
+        setIsLoading(false);
       })
   }, [])
   return (
     <div className={styles.container}>
       {
-        videos.map((video: IVideo) => (
-          <HomepageVideoItem videoInfo={video} key={v4()} />
-        ))
+        isLoading ? <CircularProgress
+          style={{
+            margin: '0 auto',
+            position: 'absolute',
+            top: '50%',
+            left: 'calc(50% - 28px)'
+          }}
+        /> :
+          videos.map((video: IVideo) => (
+            <HomepageVideoItem videoInfo={video} key={v4()} />
+          ))
       }
     </div>
   );
