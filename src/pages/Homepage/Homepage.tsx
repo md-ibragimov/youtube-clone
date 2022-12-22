@@ -43,10 +43,12 @@ function Homepage({ }) {
       {
         isLoading ? <CircularProgress
           style={{
+            width: '50px',
+            height: '50px',
             margin: '0 auto',
             position: 'absolute',
             top: '50%',
-            left: 'calc(50% - 28px)'
+            left: 'calc(50% - 25px)'
           }}
         /> :
           videos.map((video: IVideo) => (

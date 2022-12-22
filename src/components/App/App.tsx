@@ -3,6 +3,7 @@ import Homepage from '../../pages/Homepage/Homepage';
 import Videopage from '../../pages/Videopage/Videopage';
 import Notfoundpage from '../../pages/Notfoundpage/Notfoundpage';
 import Searchresults from '../../pages/Searchresults/Searchresults';
+import ChannelPage from '../../pages/ChannelPage/ChannelPage';
 import { Routes, Route } from 'react-router-dom'
 
 
@@ -14,6 +15,7 @@ function App({ }) {
         <Route path='/' element={<Homepage />} />
         <Route path='/watch/:id' element={<Videopage />} />
         <Route path='/search/:searchrequest' element={< Searchresults />} />
+        <Route path='/channel/:id' element={< ChannelPage />} />
         <Route path='*' element={<Notfoundpage />} />
       </Route>
     </Routes>

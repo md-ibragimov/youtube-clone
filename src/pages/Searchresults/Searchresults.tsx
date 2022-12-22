@@ -4,19 +4,40 @@ import ChannelItem from '../../components/ChannelItem/ChannelItem';
 import VideoItem from '../../components/VideoItem/VideoItem';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Container } from '@mui/material';
-
+import { useInView } from 'react-intersection-observer';
+import { v4 } from 'uuid';
 
 
 
 function Searchresults({ }) {
+  const { ref, inView } = useInView({
+    threshold: 0,
+  })
   const { searchrequest } = useParams() as any;
   const [pageToken, setPageToken] = useState<string>('');
   const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [isLazyLoading, setIsLazyLoading] = useState<Boolean>(false);
   const [searchResult, setSearchResult] = useState<any[]>([]);
 
+  useEffect(() => {
+    if (inView) handleVideos();
+    console.log(inView)
+  }, [inView])
+  const handleVideos = () => {
+    if (searchResult.length) {
+      setIsLazyLoading(true);
+      youtubeSearch(searchrequest, pageToken).then(el => {
+        if (pageToken !== el.data.nextPageToken) {
+          setSearchResult((prevValue) => [...prevValue, ...el.data.items]);
+          setPageToken(el.data.nextPageToken);
+          setIsLazyLoading(false);
+        }
 
+      })
+    }
+  }
   useEffect(() => {
     document.title = `${searchrequest} - YouTube`;
     setIsLoading(true);
@@ -33,17 +54,13 @@ function Searchresults({ }) {
 
         {isLoading ? <CircularProgress sx={{ margin: '0 auto' }} /> : searchResult.map(el => (
           el.id.kind === 'youtube#channel' ?
-            <ChannelItem dataInfo={el} key={el.id.channelId} /> :
-            <VideoItem dataInfo={el} key={el.id.videoId} />
+            <ChannelItem dataInfo={el} key={el.id.channelId + v4()} /> :
+            <VideoItem dataInfo={el} key={el.id.videoId + v4()} />
         ))}
-        <button onClick={() => {
-          youtubeSearch(searchrequest, pageToken).then(el => {
-            setSearchResult((prevValue) => [...prevValue, ...el.data.items]);
-            setPageToken(el.data.nextPageToken);
-          })
-        }}> download more</button>
-      </Container>
-    </div>
+        <div ref={ref} style={{ width: '50px', height: '50px', opacity: 0 }} >123</div>
+        {isLazyLoading && <CircularProgress />}
+      </Container >
+    </div >
   );
 }
 

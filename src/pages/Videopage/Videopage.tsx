@@ -10,10 +10,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Typography } from '@mui/material'
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 function Videopage({ }) {
   const [value, setValue] = useState<any>({});
+  const [channelId, setChannelId] = useState<string>('');
   const [relatedVideos, setRelatedVideos] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const videoId = useParams().id;
@@ -23,6 +25,7 @@ function Videopage({ }) {
       .then((el: any) => {
         document.title = `${el.data.title} - YouTube`;
         setValue(el.data)
+        setChannelId(el.data.channelId)
 
       })
     return function cleanTitle() { document.title = 'YouTube' }
@@ -49,10 +52,12 @@ function Videopage({ }) {
             average: true,
 
           })} просмотров</Typography>
-          <div className={styles['video-channel-wrapper']}>
-            <AccountCircleIcon />
-            <Typography className={styles['video-channel-title']}>{value.channelTitle}</Typography>
-          </div>
+          <Link to={`/channel/${channelId}`}>
+            <div className={styles['video-channel-wrapper']}>
+              <AccountCircleIcon />
+              <Typography className={styles['video-channel-title']}>{value.channelTitle}</Typography>
+            </div>
+          </Link>
           <Typography className={styles['video-viewers']}>{moment(value.publishDate).locale('ru').format('MM to LL')}</Typography>
         </div>
       </div>

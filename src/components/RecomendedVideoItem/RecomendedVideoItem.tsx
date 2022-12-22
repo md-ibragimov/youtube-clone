@@ -32,12 +32,14 @@ const RecomendedVideoItem: React.FC<any> = ({ data }) => {
         </div>
         <div className={styles['video-info']}>
           <Typography className={styles['video-title']}>{data.title}</Typography>
-          <Typography
-            style={{
-              color: `${grayColor('.7')}`
-            }}
-            className={styles['channel-title']}
-          >{data.channelTitle}</Typography>
+          <Link to={`/channel/${data.channelId}`}>
+            <Typography
+              style={{
+                color: `${grayColor('.7')}`
+              }}
+              className={styles['channel-title']}
+            >{data.channelTitle}</Typography>
+          </Link>
           <Typography
             style={{
               color: `${grayColor('.7')}`

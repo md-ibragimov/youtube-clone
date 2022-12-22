@@ -20,8 +20,20 @@
 
   .video-preview {
     width: auto;
-    height: 100%;
+    height: 200px;
     border-radius: 1em;
+
+    @media (max-width: 1440px) {
+      height: 160px;
+    }
+
+    @media (max-width: 768px) {
+      height: 110px;
+    }
+
+    @media (max-width: 425px) {
+      height: 80px;
+    }
   }
 
   .video-info {
@@ -46,10 +58,11 @@
 
     .video-channel {
       display: flex;
-      width: 100%;
+      width: max-content;
       height: auto;
       align-items: center;
       column-gap: 5px;
+
       .channel-name {
         font-size: 12px;
       }

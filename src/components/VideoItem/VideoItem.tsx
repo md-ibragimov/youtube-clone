@@ -53,22 +53,30 @@ const VideoItem: React.FC<IData> = ({ dataInfo }) => {
   }
 
   return (
-    <Link to={`/watch/${dataInfo.id.videoId}`}>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <Link to={`/watch/${dataInfo.id.videoId}`}>
         <img
           src={dataInfo.snippet.thumbnails.medium.url}
-          width={dataInfo.snippet.thumbnails.medium.width}
-          height='100px'
           alt="video preview"
           className={styles['video-preview']}
         />
-        <div className={styles['video-info']}>
-          <Typography className={styles['video-name']}>{dataInfo.snippet.title}</Typography>
-          <Typography
-            className={styles['video-publish-date']}
-            style={{ color: grayColor('.7') }}
-          >{publishDate.format('MM to LL')}</Typography>
-          <div className={styles['video-channel']}>
+      </Link>
+      <div className={styles['video-info']}>
+        <Link to={`/watch/${dataInfo.id.videoId}`}>
+          <Typography className={styles['video-name']}>
+            {dataInfo.snippet.title}</Typography>
+        </Link>
+        <Typography
+          className={styles['video-publish-date']}
+          style={{ color: grayColor('.7') }}
+        >{publishDate.format('MM to LL')}</Typography>
+        <Link
+          to={`/channel/${dataInfo.snippet.channelId}`}
+          style={{ width: 'max-content' }}
+        >
+          <div
+            className={styles['video-channel']}
+          >
             <AccountCircleIcon />
             <Typography style={{
               color: grayColor('.7')
@@ -76,15 +84,15 @@ const VideoItem: React.FC<IData> = ({ dataInfo }) => {
               className={styles['channel-name']}
             >{dataInfo.snippet.channelTitle}</Typography>
           </div>
-          <Typography
-            className={styles['video-description']}
-            style={{
-              color: grayColor('.7')
-            }}
-          >{dataInfo.snippet.description}</Typography>
-        </div>
+        </Link>
+        <Typography
+          className={styles['video-description']}
+          style={{
+            color: grayColor('.7')
+          }}
+        >{dataInfo.snippet.description}</Typography>
       </div>
-    </Link>
+    </div>
   );
 }
 

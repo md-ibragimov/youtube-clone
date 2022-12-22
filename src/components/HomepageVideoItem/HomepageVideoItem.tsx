@@ -51,15 +51,17 @@ const HomepageVideoItem: React.FC<IVideoItem> = ({ videoInfo }) => {
         </div>
         <div className={styles['video-info-wrapper']}>
           <Typography className={styles['video-name']}>{videoInfo.title.slice(0, 50)}</Typography>
-          <div className={styles['video-channel-wrapper']}>
-            <AccountCircleIcon />
-            <Typography
-              className={styles['video-channel']}
-              style={{
-                color: `${grayColor('.7')}`
-              }}>{videoInfo.author}</Typography>
-            <div className={styles.isVerified}>{videoInfo.isVerified && <VerifiedIcon />}</div>
-          </div>
+          <Link to={`/channel/${videoInfo.authorId}`}>
+            <div className={styles['video-channel-wrapper']}>
+              <AccountCircleIcon />
+              <Typography
+                className={styles['video-channel']}
+                style={{
+                  color: `${grayColor('.7')}`
+                }}>{videoInfo.author}</Typography>
+              <div className={styles.isVerified}>{videoInfo.isVerified && <VerifiedIcon />}</div>
+            </div>
+          </Link>
           <Typography style={{
             color: `${grayColor('.7')}`
           }} className={styles['video-viewers']}>{viewersCount} просмотров</Typography>
