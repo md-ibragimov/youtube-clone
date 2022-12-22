@@ -26,18 +26,18 @@ function Layout({ }) {
     },
   })
   return (
-    <div className={styles.container}>
-      <ThemeProvider
-        theme={theme}
-      >
-        <CssBaseline />
-        <Header
-          currentColor={currentColor}
-          setCurrentColor={setCurrentColor}
-        />
-        <Outlet />
-      </ThemeProvider >
-    </div>
+      <div className={styles.container}>
+        <ThemeProvider
+          theme={theme}
+        >
+          <CssBaseline />
+          <Header
+            currentColor={currentColor}
+            setCurrentColor={setCurrentColor}
+          />
+          <Outlet />
+        </ThemeProvider >
+      </div>
   );
 }
 

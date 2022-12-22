@@ -37,7 +37,6 @@ function ChannelPage({ }) {
     }
   }, [inView])
   useEffect(() => {
-    console.log(true)
     setIsLoading(true);
     youtubeChannelInfo(id)
       .then((el) => {

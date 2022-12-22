@@ -38,39 +38,39 @@ const HomepageVideoItem: React.FC<IVideoItem> = ({ videoInfo }) => {
     return theme.palette.mode === 'dark' ? `rgba(255, 255, 255, ${value})` : `rgba(0, 0, 0, ${value})`
   }
   return (
-    <Link to={`/watch/${videoInfo.videoId}`}>
-      <div className={styles.container}>
-        <div className={styles['video-preview-wrapper']}>
+    <div className={styles.container}>
+      <div className={styles['video-preview-wrapper']}>
+        <Link to={`/watch/${videoInfo.videoId}`}>
           <div
             className={styles['video-preview']}
             style={{
               background: `url(${videoInfo.videoThumbnails[3].url}) no-repeat no-repeat center`
             }}
           />
-          <Typography className={styles['video-duration']}>{videoInfo.timeText}</Typography>
-        </div>
-        <div className={styles['video-info-wrapper']}>
-          <Typography className={styles['video-name']}>{videoInfo.title.slice(0, 50)}</Typography>
-          <Link to={`/channel/${videoInfo.authorId}`}>
-            <div className={styles['video-channel-wrapper']}>
-              <AccountCircleIcon />
-              <Typography
-                className={styles['video-channel']}
-                style={{
-                  color: `${grayColor('.7')}`
-                }}>{videoInfo.author}</Typography>
-              <div className={styles.isVerified}>{videoInfo.isVerified && <VerifiedIcon />}</div>
-            </div>
-          </Link>
-          <Typography style={{
-            color: `${grayColor('.7')}`
-          }} className={styles['video-viewers']}>{viewersCount} просмотров</Typography>
-          <Typography style={{
-            color: `${grayColor('.7')}`
-          }} className={styles['video-publish-date']}>{videoInfo.publishedText}</Typography>
-        </div>
+        </Link>
+        <Typography className={styles['video-duration']}>{videoInfo.timeText}</Typography>
       </div>
-    </Link >
+      <div className={styles['video-info-wrapper']}>
+        <Link to={`/watch/${videoInfo.videoId}`}> <Typography className={styles['video-name']}>{videoInfo.title.slice(0, 50)}</Typography></Link>
+        <Link to={`/channel/${videoInfo.authorId}`}>
+          <div className={styles['video-channel-wrapper']}>
+            <AccountCircleIcon />
+            <Typography
+              className={styles['video-channel']}
+              style={{
+                color: `${grayColor('.7')}`
+              }}>{videoInfo.author}</Typography>
+            <div className={styles.isVerified}>{videoInfo.isVerified && <VerifiedIcon />}</div>
+          </div>
+        </Link>
+        <Typography style={{
+          color: `${grayColor('.7')}`
+        }} className={styles['video-viewers']}>{viewersCount} просмотров</Typography>
+        <Typography style={{
+          color: `${grayColor('.7')}`
+        }} className={styles['video-publish-date']}>{videoInfo.publishedText}</Typography>
+      </div>
+    </div>
   );
 }
 

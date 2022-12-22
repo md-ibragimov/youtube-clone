@@ -23,7 +23,6 @@ function Searchresults({ }) {
 
   useEffect(() => {
     if (inView) handleVideos();
-    console.log(inView)
   }, [inView])
   const handleVideos = () => {
     if (searchResult.length) {

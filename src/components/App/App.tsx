@@ -4,8 +4,7 @@ import Videopage from '../../pages/Videopage/Videopage';
 import Notfoundpage from '../../pages/Notfoundpage/Notfoundpage';
 import Searchresults from '../../pages/Searchresults/Searchresults';
 import ChannelPage from '../../pages/ChannelPage/ChannelPage';
-import { Routes, Route } from 'react-router-dom'
-
+import { Routes, Route } from 'react-router-dom';
 
 function App({ }) {
   return (

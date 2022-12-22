@@ -18,9 +18,9 @@ const RecomendedVideoItem: React.FC<any> = ({ data }) => {
 
   })
   return (
-    <Link to={`/watch/${data.videoId}`}>
-      <div className={styles.container}>
-        <div className={styles['video-image-wrapper']}>
+    <div className={styles.container}>
+      <div className={styles['video-image-wrapper']}>
+        <Link to={`/watch/${data.videoId}`}>
           <div
             style={{
               background: `url(${data.thumbnail[1].url}) no-repeat no-repeat center`,
@@ -28,33 +28,33 @@ const RecomendedVideoItem: React.FC<any> = ({ data }) => {
             }}
             className={styles['video-image']}
           />
-          <div className={styles['video-duration']}>{data.lengthText}</div>
-        </div>
-        <div className={styles['video-info']}>
-          <Typography className={styles['video-title']}>{data.title}</Typography>
-          <Link to={`/channel/${data.channelId}`}>
-            <Typography
-              style={{
-                color: `${grayColor('.7')}`
-              }}
-              className={styles['channel-title']}
-            >{data.channelTitle}</Typography>
-          </Link>
-          <Typography
-            style={{
-              color: `${grayColor('.7')}`
-            }}
-            className={styles['video-views']}
-          >{viewersCount} просмотров</Typography>
-          <Typography
-            style={{
-              color: `${grayColor('.7')}`
-            }}
-            className={styles['video-published']}
-          >{data.publishedTimeText}</Typography>
-        </div>
+        </Link>
+        <div className={styles['video-duration']}>{data.lengthText}</div>
       </div>
-    </Link>
+      <div className={styles['video-info']}>
+        <Link to={`/watch/${data.videoId}`}><Typography className={styles['video-title']}>{data.title}</Typography></Link>
+        <Link to={`/channel/${data.channelId}`}>
+          <Typography
+            style={{
+              color: `${grayColor('.7')}`
+            }}
+            className={styles['channel-title']}
+          >{data.channelTitle}</Typography>
+        </Link>
+        <Typography
+          style={{
+            color: `${grayColor('.7')}`
+          }}
+          className={styles['video-views']}
+        >{viewersCount} просмотров</Typography>
+        <Typography
+          style={{
+            color: `${grayColor('.7')}`
+          }}
+          className={styles['video-published']}
+        >{data.publishedTimeText}</Typography>
+      </div>
+    </div>
   );
 }
 
