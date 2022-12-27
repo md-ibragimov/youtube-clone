@@ -19,6 +19,7 @@
     "moment": "^2.29.4",
     "normalize.css": "^8.0.1",
     "numbro": "^2.3.6",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.4.1",
