@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "https://youtube-myclone.vercel.app/index.html"
+    }
+  ]
+}
